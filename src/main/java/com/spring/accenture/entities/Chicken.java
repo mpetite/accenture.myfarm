@@ -3,7 +3,7 @@ package com.spring.accenture.entities;
 import javax.persistence.*;
 
 @Entity
-public class Chicken implements FarmCreature {
+public class Chicken implements FarmCreature, Market {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,6 +26,10 @@ public class Chicken implements FarmCreature {
 		
 		return "nom";
 	}
-
+	
+	/*@Override
+	public static void buy() {
+		
+	}*/
 	
 }
