@@ -1,5 +1,8 @@
 package com.spring.accenture.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,7 @@ public class FarmController {
     	//falta: agregar al modelo la logica para el inicio de seción del usuario
     	//Pide Usuario y pass
     	//Si son correctos, dirige al welcome menu
-    	String money = "Ya pooar!";
+    	
     	
         
         return "home";
@@ -31,10 +34,26 @@ public class FarmController {
     //hacer billetera con varias monedas?
     //HTML:welcomeMenu
     @GetMapping("/welcomeMenu")
-    public String welcomeMenu(Model model) {
+    public String welcomeMenu(HttpServletRequest loginDataRequest, Model model) {
     	//Falta:armar la logica para que los datos que aparezacn sean dependientes de la cuenta del usuario
     	
-    	return "welcomeMenu";
+    	//requesteo los datos del login
+    	String userName = loginDataRequest.getParameter("userName");
+    	String userPass = loginDataRequest.getParameter("userPassword");
+    	
+    	//si los campos no estan vacios, cargo el menu ppal
+    	if(userName.length()!= 0 && userPass.length()!= 0) {
+    		model.addAttribute("userName", userName);
+    		return "welcomeMenu";
+    		
+    	}
+    	
+    	//sino, le muestro un gentil mensaje y lo dejo en home
+    	else {
+    		 JOptionPane.showMessageDialog(null,"Either your password or your username are incorrect." , "To err is human, but man your IQ is room temp", JOptionPane.INFORMATION_MESSAGE);
+    		return "home";
+    		
+    	}
     }
     
     

@@ -9,18 +9,21 @@
 	
 	<br><br>
 	
-	<p>In terms of money: Ya pooar!</p>
+	Welcome, $userName
 	
 	<br><br>
 	
-	<a href= "market">'ere, come cash in </a>
+	Coins: 50
 	
 	<br><br>
 	
-	<a href= "farm">Watch da produce</a>
+	<a href= "market">Market</a>
 	
 	<br><br>
 	
-	<p>Das a good 'pitalist pig</p>
+	<a href= "farm">Your farm</a>
+	
+	<br><br>
+
 </body>
 </html>
