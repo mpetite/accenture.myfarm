@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FarmController {
@@ -34,24 +37,30 @@ public class FarmController {
     //hacer billetera con varias monedas?
     //HTML:welcomeMenu
     @GetMapping("/welcomeMenu")
-    public String welcomeMenu(HttpServletRequest loginDataRequest, Model model) {
+    public ModelAndView welcomeMenu(@PathVariable String userName, @PathVariable String userPassword) {
     	//Falta:armar la logica para que los datos que aparezacn sean dependientes de la cuenta del usuario
-    	
-    	//requesteo los datos del login
-    	String userName = loginDataRequest.getParameter("userName");
-    	String userPass = loginDataRequest.getParameter("userPassword");
+    	     
+        ModelAndView mav = new ModelAndView();    
+            
     	
     	//si los campos no estan vacios, cargo el menu ppal
-    	if(userName.length()!= 0 && userPass.length()!= 0) {
-    		model.addAttribute("userName", userName);
-    		return "welcomeMenu";
+    	if(userName.length()>0 && userPassword.length()>0) {
+    		
+    		mav.setViewName("welcomeMenu");
+    		mav.addObject(userName, "name");
+    		
+    		
+    		return mav;
     		
     	}
     	
     	//sino, le muestro un gentil mensaje y lo dejo en home
     	else {
-    		 JOptionPane.showMessageDialog(null,"Either your password or your username are incorrect." , "To err is human, but man your IQ is room temp", JOptionPane.INFORMATION_MESSAGE);
-    		return "home";
+    		mav.setViewName("home.jsp");
+    		mav.addObject("Your credentials are wrong","msjErrorCredenciales");
+    		
+    		
+    		return mav;
     		
     	}
     }

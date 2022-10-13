@@ -9,7 +9,8 @@
 	
 	<br><br>
 	
-	Welcome, $userName
+	Welcome, <span th:value="${name}">
+
 	
 	<br><br>
 	
