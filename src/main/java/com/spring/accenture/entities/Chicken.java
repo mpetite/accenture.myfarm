@@ -2,9 +2,15 @@ package com.spring.accenture.entities;
 
 import javax.persistence.*;
 
-@Entity
-public class Chicken implements FarmCreature, Market {
+import com.spring.accenture.service.FarmService;
 
+@Entity
+public class Chicken {
+
+	
+	FarmService farmService = new FarmService();
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
@@ -21,11 +27,7 @@ public class Chicken implements FarmCreature, Market {
 	@Column(nullable=false)
 	private boolean isEgg = ageDays <= 31;
 
-	@Override
-	public String feed() {
-		
-		return "nom";
-	}
+
 	
 	/*@Override
 	public static void buy() {
