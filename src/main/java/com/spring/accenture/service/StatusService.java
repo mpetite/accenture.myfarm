@@ -18,7 +18,7 @@ public class StatusService {
 		// llamar al repo de status
 		// return info del repo extraída
 		Optional<Status> repoReturn = repo.findById(objectID);
-		return repoReturn.orElseGet(null);
+		return repoReturn.orElse(null);
 
 	}
 }
