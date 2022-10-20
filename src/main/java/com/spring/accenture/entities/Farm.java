@@ -1,79 +1,42 @@
 package com.spring.accenture.entities;
 
+import java.util.List;
 
-import javax.persistence.*;
-
-@Entity
 public class Farm {
 
-	//declaro las variables necesarias
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int ID;
-	
-	@Column(nullable = false, unique = false)
-	private String LocationID;
-	
-	@Column(nullable = true)
-	private int cattleCount;
-	
-	@Column(nullable = true)
-	private int chickenCount;
-		
-	@Column(nullable = true)
-	private int eggCount;
-	
-	@Column(nullable = true)
-	private int size;
-	
-	
-	//Pongo un solo constructor que pida la ubicacion (por ID de la granja)
-	public Farm(String locationID) {
-		super();
-		LocationID = locationID;
-	}
-	
-	
-	//getters y setters
-	//ID, Location y size solo tienen getter
-	public int getCattleCount() {
-		return cattleCount;
-	}
+	// declaro las variables necesarias
+	private long ID;
 
-	public void setCattleCount(int cattleCount) {
-		this.cattleCount = cattleCount;
-	}
+	private Status status;
 
-	public int getChickenCount() {
-		return chickenCount;
-	}
-
-	public void setChickenCount(int chickenCount) {
-		this.chickenCount = chickenCount;
-	}
-
-	public int getEggCount() {
-		return eggCount;
-	}
-
-	public void setEggCount(int eggCount) {
-		this.eggCount = eggCount;
-	}
-
-	public int getID() {
+	private List<Chicken> chickenList;
+	
+	
+	
+//getters y setters
+	public long getID() {
 		return ID;
 	}
 
-	public String getLocation() {
-		return LocationID;
+	public void setID(long iD) {
+		ID = iD;
 	}
 
-	public int getSize() {
-		return size;
+	public Status getStatus() {
+		return status;
 	}
-	
-	
-	
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public List<Chicken> getChickenList() {
+		return chickenList;
+	}
+
+	public void setChickenList(List<Chicken> chickenList) {
+		this.chickenList = chickenList;
+	}
 	
 	
 }

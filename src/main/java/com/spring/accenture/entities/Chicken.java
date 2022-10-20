@@ -2,36 +2,51 @@ package com.spring.accenture.entities;
 
 import javax.persistence.*;
 
-import com.spring.accenture.service.FarmService;
 
 @Entity
 public class Chicken {
 
-	
-	FarmService farmService = new FarmService();
-	
-	
+//genero la "tabla" de las gallinas/pollos
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int ID;
+	private long ID;
 	
-	@Column(nullable = false, unique = false)
-	private String name;
+	@Column(name = "farmID")
+	private long farmID;
 	
-	@Column(nullable=false)
-	private int age;
-	
-	@Column(nullable=false)
+	@Column
 	private int ageDays;
 	
-	@Column(nullable=false)
+	@Column
 	private boolean isEgg = ageDays <= 31;
-
-
 	
-	/*@Override
-	public static void buy() {
-		
-	}*/
+	
+	
+	//getters y setters
+
+	public long getFarmId() {
+		return farmID;
+	}
+
+	public void setFarmId(long farmID) {
+		this.farmID = farmID;
+	}
+
+	public int getAgeDays() {
+		return ageDays;
+	}
+
+	public void setAgeDays(int ageDays) {
+		this.ageDays = ageDays;
+	}
+
+	public long getID() {
+		return ID;
+	}
+
+	public boolean isEgg() {
+		return isEgg;
+	}
+
 	
 }

@@ -4,7 +4,11 @@ public class MarketService {
 	
 	
 
-	public static void Sell(long amount) {
+	public static void sellChicken(int amount, int s) {
+		
+		
+		
+		
 		
 	}
 	

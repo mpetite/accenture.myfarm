@@ -1,20 +1,14 @@
 package com.spring.accenture.repositories;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.spring.accenture.entities.Chicken;
-import com.spring.accenture.entities.Farm;
-
+@Repository
 public interface ChickenRepository extends CrudRepository<Chicken, Long> {
 
-	
-	List<Chicken> findAll();
-	
-
-	Optional<Chicken> findById(Long Id);
-
+	List<Chicken> findAllByFarmID(long farmID);
 
 }
