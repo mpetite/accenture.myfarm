@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 public class Chicken {
 
-//genero la "tabla" de las gallinas/pollos
+	//genero la "tabla" de las gallinas/pollos
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ID;
@@ -20,6 +20,20 @@ public class Chicken {
 	@Column
 	private boolean isEgg = ageDays <= 31;
 	
+	
+	//constructores
+	public Chicken() {
+		super();
+	}
+
+	public Chicken(long farmID) {
+		this.farmID = farmID;
+	}
+	
+	public Chicken(long farmID, int age) {
+		this.farmID = farmID;
+		this.ageDays = age;
+	}
 	
 	
 	//getters y setters

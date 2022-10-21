@@ -8,8 +8,10 @@ import javax.persistence.Id;
 
 @Entity
 public class Status {
-
+//esta entity declara los detalles de una granja.
+	//se le pone el dinero como medida para avanzar un MVP
 	
+	//declaro los campos necesarios
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ID;
@@ -18,8 +20,14 @@ public class Status {
 	private double money;
 	
 	@Column
+	private String size;
+	
+	@Column
 	private String locationID;
+	
+	
 
+	//getters y setters
 	public double getMoney() {
 		return money;
 	}
@@ -38,6 +46,14 @@ public class Status {
 
 	public long getID() {
 		return ID;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String newSize) {
+		size = newSize;
 	}
 	
 	
