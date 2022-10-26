@@ -10,5 +10,7 @@ import com.spring.accenture.entities.Chicken;
 public interface ChickenRepository extends CrudRepository<Chicken, Long> {
 
 	List<Chicken> findAllByFarmID(long farmID);
+	
+	List<Chicken> findAllByisEgg(boolean b);
 
 }

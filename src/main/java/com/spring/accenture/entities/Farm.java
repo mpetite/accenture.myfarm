@@ -14,7 +14,6 @@ public class Farm {
 	
 	
 	
-	
 //getters y setters
 	public long getID() {
 		return ID;
@@ -39,6 +38,5 @@ public class Farm {
 	public void setChickenList(List<Chicken> chickenList) {
 		this.chickenList = chickenList;
 	}
-	
-	
+
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.accenture.entities.Status;
 import com.spring.accenture.repositories.StatusRepository;
+
 @Service
 public class StatusService {
 
@@ -20,5 +21,9 @@ public class StatusService {
 		Optional<Status> repoReturn = repo.findById(objectID);
 		return repoReturn.orElse(null);
 
+	}
+
+	public void saveStatus(Status s) {
+		repo.save(s);
 	}
 }

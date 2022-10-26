@@ -25,6 +25,9 @@ public class Status {
 	@Column
 	private String locationID;
 	
+	@Column
+	private int cattleCount;
+	
 	
 
 	//getters y setters
@@ -54,6 +57,14 @@ public class Status {
 
 	public void setSize(String newSize) {
 		size = newSize;
+	}
+
+	public int getCattleCount() {
+		return cattleCount;
+	}
+
+	public void setCattleCount(int cattleCount) {
+		this.cattleCount = cattleCount;
 	}
 	
 	
