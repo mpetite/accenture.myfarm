@@ -32,7 +32,6 @@ public class MarketService {
 			// borro la cantidad de gallinas
 			for (int byeChicken = 1; byeChicken < amount; byeChicken++) {
 				chickenService.deleteChicken(farmID);
-				// *TODO*: falta el saveState
 			}
 			// """"transfiero"""" el dinero
 			statusService.getStatus(farmID).setMoney(farmStatus.getMoney() + totalWinning);
@@ -85,7 +84,6 @@ public class MarketService {
 			// borro la cantidad de gallinas
 			for (int byeChicken = 1; byeChicken < amount; byeChicken++) {
 				chickenService.deleteChicken(farmID);
-				// *TODO*: falta el saveState
 			}
 			// """"transfiero"""" el dinero
 			statusService.getStatus(farmID).setMoney(farmStatus.getMoney() + totalWinning);

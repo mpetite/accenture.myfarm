@@ -33,12 +33,11 @@ public class ChickenService {
 		// preguntar a lucho: (ChickenRepository) farmRepo) = "Cast" ??
 		return ((ChickenRepository) farmRepo).findAllByisEgg(true);
 	}
-
+	
 	public void saveChicken(Chicken c) {
 		repo.save(c);
-
 	}
-
+	
 	public void deleteChicken(long farmID) {
 		// consigo un ID aleatorio entre los ids de las gallinas
 		long randChickenID = (long) Math.random() * (0 - findAllChickens(farmID).size() + 1)
