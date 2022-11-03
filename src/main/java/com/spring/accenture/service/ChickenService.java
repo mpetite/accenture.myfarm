@@ -1,5 +1,6 @@
 package com.spring.accenture.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +29,43 @@ public class ChickenService {
 
 	public List<Chicken> findAllEggs(long farmID) {
 
-		List<Chicken> farmRepo = repo.findAllByFarmID(farmID);
+		List<Chicken> chickenList = repo.findAllByFarmID(farmID);
 
 		// preguntar a lucho: (ChickenRepository) farmRepo) = "Cast" ??
-		return ((ChickenRepository) farmRepo).findAllByisEgg(true);
+		return ((ChickenRepository) chickenList).findAllByisEgg(true);
 	}
-	
+
+	public List<Chicken> findProducts(long farmID, int product) {
+
+		List<Chicken> productList = repo.findAllByFarmID(farmID);
+		List<Chicken> returnList = new ArrayList<>();
+
+		switch (product) {
+		case 0:
+			returnList = productList;
+
+		case 1:
+			for (Chicken item : productList) {
+				if (!item.isEgg()) {
+					returnList.add(item);
+				}
+			}
+
+		case 2:
+			for (Chicken item : productList) {
+				if (item.isEgg()) {
+					returnList.add(item);
+				}
+			}
+		}
+
+		return returnList;
+	}
+
 	public void saveChicken(Chicken c) {
 		repo.save(c);
 	}
-	
+
 	public void deleteChicken(long farmID) {
 		// consigo un ID aleatorio entre los ids de las gallinas
 		long randChickenID = (long) Math.random() * (0 - findAllChickens(farmID).size() + 1)
