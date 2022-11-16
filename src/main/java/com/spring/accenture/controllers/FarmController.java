@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.accenture.entities.Farm;
 import com.spring.accenture.service.FarmService;
@@ -29,10 +29,10 @@ public class FarmController {
         return "home";
     }
     
-    //mapeo el menu principal de la cuenta del usuario, donde puede ver su billetera y acceder a su granja y al mercado
-    //HTML:welcomeMenu
-    @RequestMapping(value="/farm/{farmID}", method = RequestMethod.POST)
-    public String farmView(@PathVariable int farmID, Model model) {
+    //mapeo el menu principal de la granja seleccionada por el usuario, donde puede ver su billetera y acceder a sus datos y al servicio del mercado
+    //HTML:farm
+    @GetMapping(value="/farm/{farmID}")
+    public String farmView(@RequestParam int farmID, Model model) {
     	//Falta:armar la logica para que los datos que aparezacn sean dependientes de la cuenta del usuario
     	     
         
