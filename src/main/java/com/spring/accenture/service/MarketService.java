@@ -54,9 +54,9 @@ public class MarketService {
 		if (
 		// el conteo de gallinas + la cantidad a comprar no excede el tamaño de la
 		// granja
-		(farmStatus.getSize().equals("Medium") && chickenCount < 50
-				|| farmStatus.getSize().equals("Small") && chickenCount < 24
-				|| farmStatus.getSize().equals("Large") && chickenCount < 100)) {
+		(farmStatus.getSize().equalsIgnoreCase("Medium") && chickenCount < 50
+				|| farmStatus.getSize().equalsIgnoreCase("Small") && chickenCount < 24
+				|| farmStatus.getSize().equalsIgnoreCase("Large") && chickenCount < 100)) {
 			// y si el usuario tiene suficeinte dinero
 			if (farmStatus.getMoney() - totalPrice >= 0)
 			// entonces:
@@ -114,9 +114,9 @@ public class MarketService {
 		if (
 		// el conteo de gallinas + la cantidad a comprar no excede el tamaño de la
 		// granja
-				(farmStatus.getSize().equals("Medium") && eggCount < 2000 ||
-						  farmStatus.getSize().equals("Small") && eggCount < 1000 ||
-						  farmStatus.getSize().equals("Large") && eggCount < 3000)) {
+				(farmStatus.getSize().equalsIgnoreCase("Medium") && eggCount < 2000 ||
+						  farmStatus.getSize().equalsIgnoreCase("Small") && eggCount < 1000 ||
+						  farmStatus.getSize().equalsIgnoreCase("Large") && eggCount < 3000)) {
 			// y si el usuario tiene suficeinte dinero
 			if (farmStatus.getMoney() - totalPrice >= 0)
 			// entonces:

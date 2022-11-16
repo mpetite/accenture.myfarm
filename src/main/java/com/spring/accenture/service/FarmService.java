@@ -19,7 +19,7 @@ public class FarmService {
 		
 		Farm myFarm = new Farm();
 		
-		myFarm.setChickenList(ckService.findAllChickens(farmID));
+		myFarm.setChickenList(ckService.findProducts(farmID, 0));
 		myFarm.setStatus(sService.getStatus(farmID));
 		
 		return myFarm;

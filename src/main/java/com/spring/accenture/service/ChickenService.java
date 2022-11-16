@@ -24,7 +24,7 @@ public class ChickenService {
 		List<Chicken> farmRepo = repo.findAllByFarmID(farmID);
 
 		// Copié lo de find eggs pero para gallinas
-		return ((ChickenRepository) farmRepo).findAllByisEgg(false);
+		return farmRepo;
 	}
 
 	public List<Chicken> findAllEggs(long farmID) {
@@ -42,7 +42,7 @@ public class ChickenService {
 
 		switch (product) {
 		case 0:
-			returnList = productList;
+			return productList;
 
 		case 1:
 			for (Chicken item : productList) {
@@ -50,6 +50,7 @@ public class ChickenService {
 					returnList.add(item);
 				}
 			}
+			return returnList;
 
 		case 2:
 			for (Chicken item : productList) {
@@ -57,9 +58,11 @@ public class ChickenService {
 					returnList.add(item);
 				}
 			}
+			return returnList;
+			
+		default: return productList;
 		}
-
-		return returnList;
+		
 	}
 
 	public void saveChicken(Chicken c) {
