@@ -31,8 +31,8 @@ public class FarmController {
     
     //mapeo el menu principal de la granja seleccionada por el usuario, donde puede ver su billetera y acceder a sus datos y al servicio del mercado
     //HTML:farm
-    @GetMapping(value="/farm/{farmID}")
-    public String farmView(@RequestParam int farmID, Model model) {
+    @GetMapping(value="/farm/")
+    public String farmView(@RequestParam(name = "farmIdInput") int farmID, Model model) {
     	//Falta:armar la logica para que los datos que aparezacn sean dependientes de la cuenta del usuario
     	     
         
