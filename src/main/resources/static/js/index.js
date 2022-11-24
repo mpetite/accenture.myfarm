@@ -22,7 +22,7 @@ $("#lookUpFarm").click(function(e){
         type: "GET",
         url: "/home/farm/" + $("#farm").val(),
         success: function(result) {
-            window.location.href = "/home/farm.html"
+            window.location.href = "/home/farm/" + $("#farm").val()
         },
         error: function(result) {
             alert('ERROR');

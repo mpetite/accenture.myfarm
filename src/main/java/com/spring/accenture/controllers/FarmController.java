@@ -1,12 +1,12 @@
 package com.spring.accenture.controllers;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.accenture.entities.Farm;
@@ -14,30 +14,30 @@ import com.spring.accenture.service.FarmService;
 
 
 @Controller
-@RequestMapping("home")
+@RequestMapping("")
 public class FarmController {
 	
 	@Autowired
 	private FarmService farmService;
-
+	
 
 	//mapeo la pagina de bienvenida, donde se logeara el usuario a su cuenta
 	//HTML: home
-    @GetMapping(value="")
+    @GetMapping(value="/")
     public String homePage(Model model) {
-    		
+    	
         return "home";
     }
     
     //mapeo el menu principal de la granja seleccionada por el usuario, donde puede ver su billetera y acceder a sus datos y al servicio del mercado
     //HTML:farm
-    @GetMapping(value="/farm/")
-    public String farmView(@RequestParam(name = "farmIdInput") int farmID, Model model) {
+    @GetMapping(value="/farm")
+    public String farmView(@RequestParam String farmID, Model model) {
     	//Falta:armar la logica para que los datos que aparezacn sean dependientes de la cuenta del usuario
     	     
+        int nbrFarmID = Integer.valueOf(farmID);
         
-        
-		Farm theFarm = farmService.getFarmByID(farmID);
+		Farm theFarm = farmService.getFarmByID(nbrFarmID);
 		
 		String farmLocationName = theFarm.getStatus().getLocationID();
 		String farmLocationSize = theFarm.getStatus().getSize();
@@ -57,14 +57,5 @@ public class FarmController {
     	return "farm";
     	}
     
-    
-    //mapeo la granja, donde el usuario va a poder ver el status de su producto, 
-    //HTML:farm
-/*    
-    //CAMBIAR POR LINKEO AL OTRO CONTROLLER
-    @GetMapping("/farm/{farmID}")
-    public Farm farm(@PathVariable long farmID) {
-
-    	return farmService.getFarmByID(farmID);
-    }*/
 }
+
