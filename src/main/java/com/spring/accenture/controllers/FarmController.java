@@ -47,12 +47,12 @@ public class FarmController {
 		int farmCattleCount = theFarm.getStatus().getCattleCount();
         
 		
-		model.addAttribute(farmLocationName);
-		model.addAttribute(farmLocationSize);
-		model.addAttribute(farmLocationMoney);
-		model.addAttribute(farmChickenCount);
-		model.addAttribute(farmEggCount);
-		model.addAttribute(farmCattleCount);
+		model.addAttribute("farmLocationName", farmLocationName);
+		model.addAttribute("farmLocationSize", farmLocationSize);
+		model.addAttribute("farmLocationMoney", farmLocationMoney);
+		model.addAttribute("farmChickenCount", farmChickenCount);
+		model.addAttribute("farmEggCount", farmEggCount);
+		model.addAttribute("farmCattleCount", farmCattleCount);
     		
     	return "farm";
     	}

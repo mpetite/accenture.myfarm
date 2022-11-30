@@ -1,5 +1,6 @@
 package com.spring.accenture.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Farm {
@@ -31,14 +32,14 @@ public class Farm {
 	
 	public List<Chicken> getChickenList(int option) {
 
-		List<Chicken> returnChickenList = null;
+		List<Chicken> returnChickenList =  new ArrayList<Chicken>();
 		
 		switch (option) {
 		case 0:
 			returnChickenList = chickenList;
-			
 
 		case 1:
+			
 			for (Chicken item : chickenList) {
 				if (!item.isEgg()) {
 					returnChickenList.add(item);

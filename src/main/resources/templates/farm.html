@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head> <title> My Farm Application </title> </head>
 
 <body>
 	<!-- Ponemos el titulo -->
 	<h1>My Farm Application: Your Farm</h1>
-	
-	<br><br>
-	Location Name: <p th:text"farmLocationName" /><!-- poner status(farmID).name --><br>
-	
-	Location Size:  <p th:text"farmLocationSize" /><!-- poner status(farmID).size --><br>
-	
-	Money:  <p th:text"farmLocationMoney" /><!-- poner status(farmID).money --><br>
-	
-	Chicken Count:  <p th:text"farmChickenCount" /><!-- poner Chicken(farmID).size --><br>
-	
-	Egg Count:  <p th:text"farmEggCount" /><!-- poner Chicken(farmID).size --><br>
-	
-	Cattle Count:  <p th:text"farmCattleCount" /><!-- poner status(farmID).CattleCount --><br>
-	
+	<br>
+	<br>
+	Location Name: <span th:text"${farmLocationName]"/>
+	<br>
+	<br>
+	Location Size:  <span th:text"farmLocationSize" />
+	<br>
+	<br>
+	Money:  <span th:text"farmLocationMoney" />
+	<br>
+	<br>
+	Chicken Count:  <span th:text"${farmChickenCount}" />
+	<br>
+	<br>
+	Egg Count:  <span th:text"{farmEggCount}" />
+	<br>
+	<br>
+	Cattle Count:  <span th:text"{farmCattleCount}" />
+	<br>
+	<br>
 	Download Report
-	
-	
-	
+	<br>
+	<br>
+	<br>
+	<br>
 	Market:
 	<!-- add market -->
 
