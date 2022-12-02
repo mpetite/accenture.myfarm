@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head> <title> My Farm Application </title> </head>
+<head> <title> My Farm Application </title> 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+</script>
+</head>
 
 <body>
 	<!-- Ponemos el titulo -->
 	<h1>My Farm Application: Your Farm</h1>
 	<br>
 	<br>
-	Location Name: <span th:text"${farmLocationName]"/>
+	<!-- Detallamos la info de la granja -->
+	Location Name: <span th:text="${farmStatus.getLocationID()}"/>
 	<br>
 	<br>
-	Location Size:  <span th:text"farmLocationSize" />
+	Location Size:  <span th:text="${farmStatus.getSize()}" />
 	<br>
 	<br>
-	Money:  <span th:text"farmLocationMoney" />
+	Money:  <span th:text="${farmStatus.getMoney()}" />
 	<br>
 	<br>
-	Chicken Count:  <span th:text"${farmChickenCount}" />
+	Chicken Count:  <span th:text="${chickenCount}" />
 	<br>
 	<br>
-	Egg Count:  <span th:text"{farmEggCount}" />
+	Egg Count:  <span th:text="${eggCount}" />
 	<br>
 	<br>
-	Cattle Count:  <span th:text"{farmCattleCount}" />
+	Cattle Count:  <span th:text="${farmStatus.getCattleCount()}" />
 	<br>
 	<br>
 	Download Report
@@ -33,6 +38,30 @@
 	<br>
 	Market:
 	<!-- add market -->
-
+	<br>
+	<br>
+	<button  id="buyChickenBtn" onclick="buy()">Buy Chicken!</button>
+	<br>
+	<button  id="sellChickenBtn">Sell Chicken!</button>
+	<br>
+	<button  id="buyEggBtn">Buy Egg!</button>
+	<br>
+	<button  id="sellEggBtn">Sell Egg!</button>
+	<br>
 </body>
+	<script>
+		function buy(){
+				$.ajax({
+				        type: "POST",
+				        url: "/api/buyChicken",
+				        success: function(result) {
+				        	
+				            location.reload();
+				        },
+				        error: function(result) {
+				            alert('ERROR');
+				        }
+				    });
+		}
+	</script>
 </html>

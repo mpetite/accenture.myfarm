@@ -1,15 +1,17 @@
 package com.spring.accenture.controllers;
-
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.accenture.entities.Chicken;
 import com.spring.accenture.entities.Farm;
+import com.spring.accenture.entities.Status;
 import com.spring.accenture.service.FarmService;
 
 
@@ -33,29 +35,36 @@ public class FarmController {
     //HTML:farm
     @GetMapping(value="/farm")
     public String farmView(@RequestParam String farmID, Model model) {
-    	//Falta:armar la logica para que los datos que aparezacn sean dependientes de la cuenta del usuario
+    	
     	     
         int nbrFarmID = Integer.valueOf(farmID);
         
 		Farm theFarm = farmService.getFarmByID(nbrFarmID);
 		
-		String farmLocationName = theFarm.getStatus().getLocationID();
-		String farmLocationSize = theFarm.getStatus().getSize();
-		double farmLocationMoney = theFarm.getStatus().getMoney();
-		int farmChickenCount = theFarm.getChickenList(1).size();
-		int farmEggCount = theFarm.getChickenList(2).size();
-		int farmCattleCount = theFarm.getStatus().getCattleCount();
-        
+		List<Chicken> farmChickenList = theFarm.getChickenList(0);
 		
-		model.addAttribute("farmLocationName", farmLocationName);
-		model.addAttribute("farmLocationSize", farmLocationSize);
-		model.addAttribute("farmLocationMoney", farmLocationMoney);
-		model.addAttribute("farmChickenCount", farmChickenCount);
-		model.addAttribute("farmEggCount", farmEggCount);
-		model.addAttribute("farmCattleCount", farmCattleCount);
+		Status farmStatus =theFarm.getStatus();
+		
+        model.addAttribute("farmStatus", farmStatus);
+        model.addAttribute("chickenCount", theFarm.getChickenList(1).size());
+        model.addAttribute("eggCount", theFarm.getChickenList(2).size());
+        model.addAttribute("chickenList", farmChickenList);
+            
     		
     	return "farm";
     	}
+    
+    
+    //farmView con post para poder usar el market
+    @RequestMapping(value="/farm", method=RequestMethod.POST)
+    public String farmViewPost(@RequestParam String farmID, Model model) {
+    	
+    	
+    	
+    	
+    
+    return "farm";
+    }
     
 }
 

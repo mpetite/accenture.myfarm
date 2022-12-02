@@ -37,24 +37,26 @@ public class Farm {
 		switch (option) {
 		case 0:
 			returnChickenList = chickenList;
-
+			break;
 		case 1:
 			
 			for (Chicken item : chickenList) {
 				if (!item.isEgg()) {
 					returnChickenList.add(item);
 				}
+
 			}
-			
+			break;
 
 		case 2:
 			for (Chicken item : chickenList) {
 				if (item.isEgg()) {
 					returnChickenList.add(item);
 				}
+				
 			}
+			break;
 		}
-		
 		return returnChickenList;
 	}
 
