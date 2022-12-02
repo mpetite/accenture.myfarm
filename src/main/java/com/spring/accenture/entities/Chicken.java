@@ -18,21 +18,18 @@ public class Chicken {
 	private int ageDays;
 	
 	@Column
-	private boolean isEgg = ageDays <= 31;
+	private boolean isEgg;
 	
 	
 	//constructores
 	public Chicken() {
 		super();
 	}
-
-	public Chicken(long farmID) {
-		this.farmID = farmID;
-	}
 	
 	public Chicken(long farmID, int age) {
 		this.farmID = farmID;
 		this.ageDays = age;
+		this.isEgg = age <= 31;
 	}
 	
 	

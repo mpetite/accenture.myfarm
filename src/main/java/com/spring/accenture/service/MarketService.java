@@ -33,7 +33,7 @@ public class MarketService {
 		// entonces:
 		{
 			// borro la cantidad de gallinas
-			for (int byeChicken = 1; byeChicken < amount; byeChicken++) {
+			for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
 				chickenService.deleteChicken(farmID);
 			}
 			// """"transfiero"""" el dinero
@@ -63,7 +63,7 @@ public class MarketService {
 			// entonces:
 			{
 				// creo la cantidad de gallinas
-				for (int newChicken = 1; newChicken < amount; newChicken++) {
+				for (int newChicken = 1; newChicken <= amount; newChicken++) {
 					Chicken chicken = new Chicken(farmID, 32);
 					chickenService.saveChicken(chicken);
 				}
@@ -92,7 +92,7 @@ public class MarketService {
 		// entonces:
 		{
 			// borro la cantidad de gallinas
-			for (int byeChicken = 1; byeChicken < amount; byeChicken++) {
+			for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
 				chickenService.deleteChicken(farmID);
 
 			}
@@ -123,7 +123,7 @@ public class MarketService {
 			// entonces:
 			{
 				// creo la cantidad de gallinas
-				for (int newEgg = 1; newEgg < amount; newEgg++) {
+				for (int newEgg = 1; newEgg <= amount; newEgg++) {
 					Chicken egg = new Chicken(farmID, 0);
 					chickenService.saveChicken(egg);
 				}

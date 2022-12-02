@@ -73,6 +73,8 @@ public class ChickenService {
 		// consigo un ID aleatorio entre los ids de las gallinas
 		long randChickenID = (long) Math.random() * (0 - findAllChickens(farmID).size() + 1)
 				+ findAllChickens(farmID).size();
+		//*OPCION 2*: long randChickenID = findAllChickens(farmID).get(0).getID();
+		
 		// lo borro
 		repo.deleteById(randChickenID);
 	}
@@ -80,6 +82,9 @@ public class ChickenService {
 	public void deleteEgg(long farmID) {
 		// consigo un ID aleatorio entre los ids de las gallinas
 		long randEggID = (long) Math.random() * (0 - findAllEggs(farmID).size() + 1) + findAllEggs(farmID).size();
+		
+		//*OPCION 2*: long randChickenID = findAllEggs(farmID).get(0).getID();
+		
 		// lo borro
 		repo.deleteById(randEggID);
 	}
