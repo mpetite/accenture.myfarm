@@ -40,7 +40,7 @@
 	<!-- add market -->
 	<br>
 	<br>
-	<button  id="buyChickenBtn" onclick="buy()">Buy Chicken!</button>
+	<button  id="buyChickenBtn" th:onclick="'javascript:buy(' + ${farmStatus.getID()} + ')'">Buy Chicken!</button>
 	<br>
 	<button  id="sellChickenBtn">Sell Chicken!</button>
 	<br>
@@ -50,10 +50,11 @@
 	<br>
 </body>
 	<script>
-		function buy(){
+		function buy(id){
 				$.ajax({
 				        type: "POST",
 				        url: "/api/buyChicken",
+				        data: {"id": id},
 				        success: function(result) {
 				        	
 				            location.reload();

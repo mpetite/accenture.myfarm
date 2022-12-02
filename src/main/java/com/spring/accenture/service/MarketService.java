@@ -1,24 +1,25 @@
 package com.spring.accenture.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.accenture.entities.Chicken;
 import com.spring.accenture.entities.Status;
 import com.spring.accenture.exceptions.InsufficientFundsException;
 import com.spring.accenture.exceptions.InsufficientStorageException;
-
+@Service
 public class MarketService {
 
 	public static final double CHICKENPRICE = 35;
 	public static final double EGGPRICE = 1;
 
 	@Autowired
-	private static ChickenService chickenService;
+	private ChickenService chickenService;
 
 	@Autowired
-	private static StatusService statusService;
+	private StatusService statusService;
 
-	public static void sellChicken(int amount, long farmID) {
+	public void sellChicken(int amount, long farmID) {
 
 		// Consigo el tamaño de la granja
 		Status farmStatus = statusService.getStatus(farmID);
@@ -41,7 +42,7 @@ public class MarketService {
 		}
 	}
 
-	public static void buyChicken(int amount, long farmID)
+	public void buyChicken(int amount, long farmID)
 			throws InsufficientFundsException, InsufficientStorageException {
 
 		// Consigo la cantidad de gallinas en la granja y el tamaño de la misma
@@ -77,7 +78,7 @@ public class MarketService {
 		}
 	}
 
-	public static void sellEgg(int amount, long farmID) {
+	public void sellEgg(int amount, long farmID) {
 		// Consigo status de granja
 		Status farmStatus = statusService.getStatus(farmID);
 
@@ -101,7 +102,7 @@ public class MarketService {
 		}
 	}
 
-	public static void buyEgg(int amount, long farmID) 
+	public void buyEgg(int amount, long farmID) 
 			throws InsufficientFundsException, InsufficientStorageException {
 
 		// Consigo la cantidad de gallinas en la granja y el tamaño de la misma
