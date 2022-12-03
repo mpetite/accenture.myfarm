@@ -93,7 +93,7 @@ public class MarketService {
 		{
 			// borro la cantidad de gallinas
 			for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
-				chickenService.deleteChicken(farmID);
+				chickenService.deleteEgg(farmID);
 
 			}
 			// """"transfiero"""" el dinero

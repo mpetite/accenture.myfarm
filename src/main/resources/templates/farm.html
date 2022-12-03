@@ -40,17 +40,17 @@
 	<!-- add market -->
 	<br>
 	<br>
-	<button  id="buyChickenBtn" th:onclick="'javascript:buy(' + ${farmStatus.getID()} + ')'">Buy Chicken!</button>
+	<button  id="buyChickenBtn" th:onclick="'javascript:buyChicken(' + ${farmStatus.getID()} + ')'">Buy Chicken!</button>
 	<br>
-	<button  id="sellChickenBtn">Sell Chicken!</button>
+	<button  id="sellChickenBtn" th:onclick="'javascript:sellChicken(' + ${farmStatus.getID()} + ')'">Sell Chicken!</button>
 	<br>
-	<button  id="buyEggBtn">Buy Egg!</button>
+	<button  id="buyEggBtn" th:onclick="'javascript:buyEgg(' + ${farmStatus.getID()} + ')'">Buy Egg!</button>
 	<br>
-	<button  id="sellEggBtn">Sell Egg!</button>
+	<button  id="sellEggBtn" th:onclick="'javascript:sellEgg(' + ${farmStatus.getID()} + ')'">Sell Egg!</button>
 	<br>
 </body>
 	<script>
-		function buy(id){
+		function buyChicken(id){
 				$.ajax({
 				        type: "POST",
 				        url: "/api/buyChicken",
@@ -60,7 +60,49 @@
 				            location.reload();
 				        },
 				        error: function(result) {
-				            alert('ERROR');
+				            alert(result);
+				        }
+				    });
+		}
+		function buyEgg(id){
+				$.ajax({
+				        type: "POST",
+				        url: "/api/buyEgg",
+				        data: {"id": id},
+				        success: function(result) {
+				        	
+				            location.reload();
+				        },
+				        error: function(result) {
+				            alert(result);
+				        }
+				    });
+		}
+				function sellChicken(id){
+				$.ajax({
+				        type: "POST",
+				        url: "/api/sellChicken",
+				        data: {"id": id},
+				        success: function(result) {
+				        	
+				            location.reload();
+				        },
+				        error: function(result) {
+				            alert(result);
+				        }
+				    });
+		}
+				function sellEgg(id){
+				$.ajax({
+				        type: "POST",
+				        url: "/api/sellEgg",
+				        data: {"id": id},
+				        success: function(result) {
+				        	
+				            location.reload();
+				        },
+				        error: function(result) {
+				            alert(result);
 				        }
 				    });
 		}

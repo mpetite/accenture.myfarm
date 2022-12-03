@@ -24,8 +24,6 @@ public class DataReportController {
 	@Autowired
 	private MarketService marketService;
 
-	// mapeo la granja, donde el usuario va a poder ver el status de su producto,
-	// HTML:farm
 	@GetMapping("/farm/{farmID}")
 	public Farm farm(@PathVariable long farmID) {
 		
@@ -39,10 +37,7 @@ public class DataReportController {
 
 		return farmService.getFarmByID(farmID);
 	}
-	
-	
-	// mapeo la granja, donde el usuario va a poder ver el status de su producto,
-	// HTML:farm
+
 	@PostMapping(value="/buyChicken")
 	public void buyChicken(@RequestParam String id) {
 		
@@ -51,8 +46,35 @@ public class DataReportController {
 		} catch (NumberFormatException | InsufficientFundsException | InsufficientStorageException e) {
 			e.printStackTrace();
 		}
-
 	}
-
-
+	
+	@PostMapping(value="/buyEgg")
+	public void buyEgg(@RequestParam String id) {
+		
+		try {
+			marketService.buyEgg(1, Long.parseLong(id));
+		} catch (NumberFormatException | InsufficientFundsException | InsufficientStorageException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping(value="/sellChicken")
+	public void sellChicken(@RequestParam String id) {
+		
+		try {
+			marketService.sellChicken(1, Long.parseLong(id));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping(value="/sellEgg")
+	public void sellEgg(@RequestParam String id) {
+		
+		try {
+			marketService.sellEgg(1, Long.parseLong(id));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+	}
 }

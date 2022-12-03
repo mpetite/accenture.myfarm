@@ -2,6 +2,7 @@ package com.spring.accenture.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,17 +23,19 @@ public class ChickenService {
 	public List<Chicken> findAllChickens(long farmID) {
 
 		List<Chicken> farmRepo = repo.findAllByFarmID(farmID);
+		
+		farmRepo = farmRepo.stream().filter(Chicken -> !Chicken.isEgg()).collect(Collectors.toList());
 
-		// Copié lo de find eggs pero para gallinas
 		return farmRepo;
 	}
 
 	public List<Chicken> findAllEggs(long farmID) {
 
-		List<Chicken> chickenList = repo.findAllByFarmID(farmID);
+		List<Chicken> farmRepo = repo.findAllByFarmID(farmID);
+		
+		farmRepo = farmRepo.stream().filter(Chicken -> Chicken.isEgg()).collect(Collectors.toList());
 
-		// preguntar a lucho: (ChickenRepository) farmRepo) = "Cast" ??
-		return ((ChickenRepository) chickenList).findAllByisEgg(true);
+		return farmRepo;
 	}
 
 	public List<Chicken> findProducts(long farmID, int product) {
@@ -71,9 +74,9 @@ public class ChickenService {
 
 	public void deleteChicken(long farmID) {
 		// consigo un ID aleatorio entre los ids de las gallinas
-		long randChickenID = (long) Math.random() * (0 - findAllChickens(farmID).size() + 1)
-				+ findAllChickens(farmID).size();
-		//*OPCION 2*: long randChickenID = findAllChickens(farmID).get(0).getID();
+		/*long randChickenID = (long) Math.random() * (0 - findAllChickens(farmID).size() + 1)
+				+ findAllChickens(farmID).size();*/
+		long randChickenID = findAllChickens(farmID).get(0).getID();
 		
 		// lo borro
 		repo.deleteById(randChickenID);
@@ -81,9 +84,9 @@ public class ChickenService {
 
 	public void deleteEgg(long farmID) {
 		// consigo un ID aleatorio entre los ids de las gallinas
-		long randEggID = (long) Math.random() * (0 - findAllEggs(farmID).size() + 1) + findAllEggs(farmID).size();
-		
-		//*OPCION 2*: long randChickenID = findAllEggs(farmID).get(0).getID();
+		/*long randEggID = (long) Math.random() * (0 - findAllEggs(farmID).size() + 1) + findAllEggs(farmID).size();
+		*/
+		long randEggID = findAllEggs(farmID).get(0).getID();
 		
 		// lo borro
 		repo.deleteById(randEggID);
