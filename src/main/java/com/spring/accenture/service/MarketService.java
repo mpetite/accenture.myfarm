@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.spring.accenture.entities.Chicken;
 import com.spring.accenture.entities.Status;
 import com.spring.accenture.exceptions.InsufficientFundsException;
+import com.spring.accenture.exceptions.InsufficientLivestockException;
 import com.spring.accenture.exceptions.InsufficientStorageException;
 @Service
 public class MarketService {
@@ -19,13 +20,16 @@ public class MarketService {
 	@Autowired
 	private StatusService statusService;
 
-	public void sellChicken(int amount, long farmID) {
+	public void sellChicken(int amount, long farmID) throws InsufficientLivestockException {
 
 		// Consigo el tamaño de la granja
 		Status farmStatus = statusService.getStatus(farmID);
 
 		// fijo las ganancias totales
 		double totalWinning = CHICKENPRICE * amount;
+		
+		if (chickenService.findAllChickens(farmID).size()>0)
+		{
 		// si
 		if (
 		// hay suficientes vacas
@@ -40,7 +44,14 @@ public class MarketService {
 			farmStatus.setMoney(farmStatus.getMoney() + totalWinning);
 			statusService.saveStatus(farmStatus);
 		}
+		else {
+			throw new InsufficientLivestockException("You don´t have enough cattle to continue selling.");			
+		}
+}
+	else {
+		throw new InsufficientLivestockException("No chicken to sell.");
 	}
+}
 
 	public void buyChicken(int amount, long farmID)
 			throws InsufficientFundsException, InsufficientStorageException {
@@ -78,30 +89,38 @@ public class MarketService {
 		}
 	}
 
-	public void sellEgg(int amount, long farmID) {
+	public void sellEgg(int amount, long farmID) throws InsufficientLivestockException {
 		// Consigo status de granja
 		Status farmStatus = statusService.getStatus(farmID);
 
 		// fijo las ganancias totales
 		double totalWinning = EGGPRICE * amount;
-
-		// si:
-		if (
-		// hay suficientes vacas
-		(farmStatus.getCattleCount() > 4))
-		// entonces:
+		
+		if (chickenService.findAllEggs(farmID).size()>0)
 		{
-			// borro la cantidad de gallinas
-			for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
-				chickenService.deleteEgg(farmID);
-
+			// si:
+			if (
+			// hay suficientes vacas
+			(farmStatus.getCattleCount() > 4))
+			// entonces:
+			{
+				// borro la cantidad de gallinas
+				for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
+					chickenService.deleteEgg(farmID);
+	
+				}
+				// """"transfiero"""" el dinero
+				statusService.getStatus(farmID).setMoney(farmStatus.getMoney() + totalWinning);
+				statusService.saveStatus(farmStatus);
 			}
-			// """"transfiero"""" el dinero
-			statusService.getStatus(farmID).setMoney(farmStatus.getMoney() + totalWinning);
-			statusService.saveStatus(farmStatus);
-		}
+			else {
+				throw new InsufficientLivestockException("You don´t have enough cattle to continue selling.");			
+			}
 	}
-
+		else {
+			throw new InsufficientLivestockException("No eggs to sell.");
+		}
+}
 	public void buyEgg(int amount, long farmID) 
 			throws InsufficientFundsException, InsufficientStorageException {
 

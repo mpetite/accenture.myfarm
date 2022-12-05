@@ -31,7 +31,6 @@
 	Cattle Count:  <span th:text="${farmStatus.getCattleCount()}" />
 	<br>
 	<br>
-	Download Report
 	<br>
 	<br>
 	<br>
@@ -48,6 +47,9 @@
 	<br>
 	<button  id="sellEggBtn" th:onclick="'javascript:sellEgg(' + ${farmStatus.getID()} + ')'">Sell Egg!</button>
 	<br>
+	
+	
+
 </body>
 	<script>
 		function buyChicken(id){
@@ -56,11 +58,10 @@
 				        url: "/api/buyChicken",
 				        data: {"id": id},
 				        success: function(result) {
-				        	
 				            location.reload();
 				        },
-				        error: function(result) {
-				            alert(result);
+				        error: function (result) {
+        					alert(result.responseText);
 				        }
 				    });
 		}
@@ -74,7 +75,7 @@
 				            location.reload();
 				        },
 				        error: function(result) {
-				            alert(result);
+				            alert(result.responseText);
 				        }
 				    });
 		}
@@ -88,7 +89,7 @@
 				            location.reload();
 				        },
 				        error: function(result) {
-				            alert(result);
+				            alert(result.responseText);
 				        }
 				    });
 		}
@@ -98,11 +99,10 @@
 				        url: "/api/sellEgg",
 				        data: {"id": id},
 				        success: function(result) {
-				        	
 				            location.reload();
 				        },
 				        error: function(result) {
-				            alert(result);
+				            alert(result.responseText);
 				        }
 				    });
 		}

@@ -24,7 +24,7 @@ public class ChickenService {
 
 		List<Chicken> farmRepo = repo.findAllByFarmID(farmID);
 		
-		farmRepo = farmRepo.stream().filter(Chicken -> !Chicken.isEgg()).collect(Collectors.toList());
+		farmRepo = farmRepo.stream().filter(Chicken -> !Chicken.getIsEgg()).collect(Collectors.toList());
 
 		return farmRepo;
 	}
@@ -33,7 +33,7 @@ public class ChickenService {
 
 		List<Chicken> farmRepo = repo.findAllByFarmID(farmID);
 		
-		farmRepo = farmRepo.stream().filter(Chicken -> Chicken.isEgg()).collect(Collectors.toList());
+		farmRepo = farmRepo.stream().filter(Chicken -> Chicken.getIsEgg()).collect(Collectors.toList());
 
 		return farmRepo;
 	}
@@ -49,7 +49,7 @@ public class ChickenService {
 
 		case 1:
 			for (Chicken item : productList) {
-				if (!item.isEgg()) {
+				if (!item.getIsEgg()) {
 					returnList.add(item);
 				}
 			}
@@ -57,7 +57,7 @@ public class ChickenService {
 
 		case 2:
 			for (Chicken item : productList) {
-				if (item.isEgg()) {
+				if (item.getIsEgg()) {
 					returnList.add(item);
 				}
 			}

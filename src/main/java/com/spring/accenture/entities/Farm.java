@@ -41,7 +41,7 @@ public class Farm {
 		case 1:
 			
 			for (Chicken item : chickenList) {
-				if (!item.isEgg()) {
+				if (!item.getIsEgg()) {
 					returnChickenList.add(item);
 				}
 
@@ -50,7 +50,7 @@ public class Farm {
 
 		case 2:
 			for (Chicken item : chickenList) {
-				if (item.isEgg()) {
+				if (item.getIsEgg()) {
 					returnChickenList.add(item);
 				}
 				

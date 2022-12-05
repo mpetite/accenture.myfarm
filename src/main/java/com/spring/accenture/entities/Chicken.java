@@ -55,9 +55,11 @@ public class Chicken {
 		return ID;
 	}
 
-	public boolean isEgg() {
+	public boolean getIsEgg() {
 		return isEgg;
 	}
 
-	
+	public void setIsEgg(boolean a) {
+		this.isEgg = a;
+	}
 }
