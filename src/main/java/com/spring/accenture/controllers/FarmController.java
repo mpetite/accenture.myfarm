@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.spring.accenture.entities.Chicken;
 import com.spring.accenture.entities.Farm;
 import com.spring.accenture.entities.Status;
+import com.spring.accenture.repositories.StatusRepository;
 import com.spring.accenture.service.FarmService;
+
 
 
 @Controller
@@ -23,11 +25,15 @@ public class FarmController {
 	@Autowired
 	private FarmService farmService;
 	
+	@Autowired
+	private StatusRepository statusRepository;
 
 	//mapeo la pagina de bienvenida, donde se logeara el usuario a su cuenta
 	//HTML: home
     @GetMapping(value="/")
     public String homePage(Model model) {
+    	
+    	model.addAttribute("farmList", statusRepository.findAll());
     	
         return "home";
     }

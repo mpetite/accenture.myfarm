@@ -87,4 +87,11 @@ public class DataReportController {
 			return ResponseEntity.internalServerError().body(e.getMessage());
 		}
 	}
+	
+	@PostMapping(value="/agregarDia")
+	public ResponseEntity agregarDia() {
+		
+		marketService.agregarDia();
+		return ResponseEntity.ok("done");
+	}
 }

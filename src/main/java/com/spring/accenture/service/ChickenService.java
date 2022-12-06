@@ -92,4 +92,11 @@ public class ChickenService {
 		repo.deleteById(randEggID);
 	}
 
+	public List<Chicken> findAllLivestock() {
+		return (List<Chicken>)repo.findAll();
+	}
+	
+	public void saveAllLivestock(List<Chicken> chickenList) {
+		repo.saveAll(chickenList);
+	}
 }

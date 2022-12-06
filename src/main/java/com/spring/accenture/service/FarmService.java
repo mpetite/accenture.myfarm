@@ -23,8 +23,5 @@ public class FarmService {
 		myFarm.setStatus(sService.getStatus(farmID));
 		
 		return myFarm;
-	}
-	
-
-	
+	}	
 }

@@ -1,34 +1,66 @@
-$("#searchFarm").click(function(e) {
-    e.preventDefault();
-    $.ajax({
-        type: "GET",
-        url: "/api/farm/" + $("#farm").val(),
-        success: function(result) {
-            alert("Hay " + result.chickenList.length + " pollos.");
-            console.log(result.status.locationID);
-        },
-        error: function(result) {
-            alert('ERROR');
-        }
-    });
-});
-
-$("#lookUpFarm").click(function(e){
-	/*e.preventDefault();
-	//	
-	window.location.href = "farm.html"*/
-	e.preventDefault();
-    $.ajax({
-        type: "GET",
-        url: "/home/farm/" + $("#farm").val(),
-        success: function(result) {
-            window.location.href = "/home/farm/" + $("#farm").val()
-        },
-        error: function(result) {
-            alert('ERROR');
-        }
-    });
-	
-
-});
-
+function buyChicken(id){
+		$.ajax({
+		        type: "POST",
+		        url: "/api/buyChicken",
+		        data: {"id": id},
+		        success: function(result) {
+		            location.reload();
+		        },
+		        error: function (result) {
+					alert(result.responseText);
+		        }
+		    });
+};
+		function buyEgg(id){
+		$.ajax({
+		        type: "POST",
+		        url: "/api/buyEgg",
+		        data: {"id": id},
+		        success: function(result) {
+		        	
+		            location.reload();
+		        },
+		        error: function(result) {
+		            alert(result.responseText);
+		        }
+		    });
+};
+		function sellChicken(id){
+		$.ajax({
+		        type: "POST",
+		        url: "/api/sellChicken",
+		        data: {"id": id},
+		        success: function(result) {
+		        	
+		            location.reload();
+		        },
+		        error: function(result) {
+		            alert(result.responseText);
+		        }
+		    });
+};
+		function sellEgg(id){
+		$.ajax({
+		        type: "POST",
+		        url: "/api/sellEgg",
+		        data: {"id": id},
+		        success: function(result) {
+		            location.reload();
+		        },
+		        error: function(result) {
+		            alert(result.responseText);
+		        }
+		    });
+};
+		function agregarDia(){
+		$.ajax({
+		        type: "POST",
+		        url: "/api/agregarDia",
+		        success: function(result) {
+		            location.reload();
+		        },
+		        error: function(result) {
+		            alert(result.responseText);
+		        }
+		    });
+};

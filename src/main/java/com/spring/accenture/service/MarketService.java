@@ -1,5 +1,7 @@
 package com.spring.accenture.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -121,6 +123,7 @@ public class MarketService {
 			throw new InsufficientLivestockException("No eggs to sell.");
 		}
 }
+
 	public void buyEgg(int amount, long farmID) 
 			throws InsufficientFundsException, InsufficientStorageException {
 
@@ -157,6 +160,17 @@ public class MarketService {
 		}
 	}
 	
+	public void agregarDia() {
+		
+		List<Chicken> chickenList = chickenService.findAllLivestock();
+		
+		for (Chicken chicken : chickenList) {
+			System.out.println("old age: "+chicken.getAgeDays());
+			chicken.increaseAge();
+			System.out.println("new age: "+chicken.getAgeDays());
+			chickenService.saveAllLivestock(chickenList);
+		}
+	}
 }
 
 

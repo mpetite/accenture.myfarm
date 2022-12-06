@@ -29,7 +29,7 @@ public class Chicken {
 	public Chicken(long farmID, int age) {
 		this.farmID = farmID;
 		this.ageDays = age;
-		this.isEgg = age <= 31;
+		this.isEgg = age <= 10;
 	}
 	
 	
@@ -61,5 +61,10 @@ public class Chicken {
 
 	public void setIsEgg(boolean a) {
 		this.isEgg = a;
+	}
+	
+	public void increaseAge() {
+		this.ageDays = ageDays + 1; 
+		this.isEgg = ageDays <= 10;
 	}
 }
