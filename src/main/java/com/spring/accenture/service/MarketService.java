@@ -1,5 +1,6 @@
 package com.spring.accenture.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class MarketService {
 			{
 				// creo la cantidad de gallinas
 				for (int newChicken = 1; newChicken <= amount; newChicken++) {
-					Chicken chicken = new Chicken(farmID, 32);
+					Chicken chicken = new Chicken(farmID, 11);
 					chickenService.saveChicken(chicken);
 				}
 				// """"transfiero"""" el dinero
@@ -164,12 +165,19 @@ public class MarketService {
 		
 		List<Chicken> chickenList = chickenService.findAllLivestock();
 		
+		List<Chicken> newEggList = new ArrayList<Chicken>();
+		
 		for (Chicken chicken : chickenList) {
-			System.out.println("old age: "+chicken.getAgeDays());
+			
 			chicken.increaseAge();
-			System.out.println("new age: "+chicken.getAgeDays());
-			chickenService.saveAllLivestock(chickenList);
+			
+			newEggList.add(chicken);
+			
+			if(chicken.getAgeDays()%7==0 && !chicken.getIsEgg()) {
+				newEggList.add(new Chicken(chicken.getFarmId(), 0));
+			}
 		}
+		chickenService.saveAllLivestock(newEggList);
 	}
 }
 
