@@ -10,7 +10,7 @@ import com.spring.accenture.repositories.StatusRepository;
 
 @Service
 public class StatusService {
-
+//este servicio maneja las granjas en el repositorio
 	@Autowired
 	private StatusRepository repo;
 

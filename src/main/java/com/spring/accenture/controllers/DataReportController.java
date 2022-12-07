@@ -16,6 +16,8 @@ import com.spring.accenture.exceptions.InsufficientStorageException;
 import com.spring.accenture.service.FarmService;
 import com.spring.accenture.service.MarketService;
 
+
+//controller de calculos
 @RestController
 @RequestMapping("/api")
 public class DataReportController {
@@ -26,20 +28,8 @@ public class DataReportController {
 	@Autowired
 	private MarketService marketService;
 
-	@GetMapping("/farm/{farmID}")
-	public Farm farm(@PathVariable long farmID) {
-		
-		Farm theFarm = farmService.getFarmByID(farmID);
-		
-		String farmLocationName = theFarm.getStatus().getLocationID();
-		String farmLocationSize = theFarm.getStatus().getSize();
-		double farmLocationCurrency = theFarm.getStatus().getMoney();
-		int farmChickenCount = theFarm.getChickenList(1).size();
-		int farmEggCount = theFarm.getChickenList(2).size();
-
-		return farmService.getFarmByID(farmID);
-	}
-
+	//Mappings que realizan calculos disparados por botones
+	//Mapping para comprar gallina, disparado por botón buy chicken
 	@PostMapping(value="/buyChicken")
 	public ResponseEntity buyChicken(@RequestParam String id) {
 		
@@ -52,6 +42,7 @@ public class DataReportController {
 		}
 	}
 	
+	//Mapping para comprar huevo, disparado por botón buy egg
 	@PostMapping(value="/buyEgg")
 	public ResponseEntity buyEgg(@RequestParam String id) {
 		
@@ -64,6 +55,7 @@ public class DataReportController {
 		}
 	}
 	
+	//Mapping para vender Chicken, disparado por botón sell chicken
 	@PostMapping(value="/sellChicken")
 	public ResponseEntity sellChicken(@RequestParam String id) {
 		
@@ -76,6 +68,7 @@ public class DataReportController {
 		}
 	}
 	
+	//Mapping para vender huevo, disparado por botón sell egg
 	@PostMapping(value="/sellEgg")
 	public ResponseEntity sellEgg(@RequestParam String id) {
 		
@@ -88,6 +81,7 @@ public class DataReportController {
 		}
 	}
 	
+	//Mapping para sumarle un dia a las edades, disparado por botón agregar dia
 	@PostMapping(value="/agregarDia")
 	public ResponseEntity agregarDia() {
 		

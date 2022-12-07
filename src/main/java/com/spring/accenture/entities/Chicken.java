@@ -5,8 +5,9 @@ import javax.persistence.*;
 
 @Entity
 public class Chicken {
+//esta entidad se encarga de los huevos y los pollos
 
-	//genero la "tabla" de las gallinas/pollos
+	//genero los campos necesarios
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ID;
@@ -34,7 +35,6 @@ public class Chicken {
 	
 	
 	//getters y setters
-
 	public long getFarmId() {
 		return farmID;
 	}
@@ -63,6 +63,9 @@ public class Chicken {
 		this.isEgg = a;
 	}
 	
+	
+	//Metodos necesarios
+	//metodo para el incremento de la edad de la entidad
 	public void increaseAge() {
 		this.ageDays = ageDays + 1; 
 		this.isEgg = ageDays <= 10;

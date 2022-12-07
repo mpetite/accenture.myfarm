@@ -9,8 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Status {
 //esta entity declara los detalles de una granja.
-	//se le pone el dinero como medida para avanzar un MVP
-	
+
 	//declaro los campos necesarios
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,8 +65,4 @@ public class Status {
 	public void setCattleCount(int cattleCount) {
 		this.cattleCount = cattleCount;
 	}
-	
-	
-	
-	
 }

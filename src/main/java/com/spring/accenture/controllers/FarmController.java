@@ -2,8 +2,6 @@ package com.spring.accenture.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +26,7 @@ public class FarmController {
 	@Autowired
 	private StatusRepository statusRepository;
 
-	//mapeo la pagina de bienvenida, donde se logeara el usuario a su cuenta
+	//mapeo la pagina de bienvenida, donde el usuario selecciona la granja que desea manejar
 	//HTML: home
     @GetMapping(value="/")
     public String homePage(Model model) {
@@ -38,7 +36,7 @@ public class FarmController {
         return "home";
     }
     
-    //mapeo el menu principal de la granja seleccionada por el usuario, donde puede ver su billetera y acceder a sus datos y al servicio del mercado
+    //mapeo el menu principal de la granja seleccionada por el usuario, donde puede ver su billetera, acceder a sus datos y al servicio del mercado
     //HTML:farm
     @GetMapping(value="/farm")
     public String farmView(@RequestParam String farmID, Model model) {
@@ -60,12 +58,6 @@ public class FarmController {
     		
     	return "farm";
     	}
-    
-    
-    @GetMapping("/hello")
-    ResponseEntity<String> hello() {
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
-    }
-    
+        
 }
 

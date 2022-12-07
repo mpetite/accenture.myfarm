@@ -12,10 +12,10 @@ import com.spring.accenture.repositories.ChickenRepository;
 
 @Service
 public class ChickenService {
-
+//Servicio que se encarga de lo que pueden/se les puede hacer a los chicken
 	@Autowired
 	private ChickenRepository repo;
-
+	//metodos de busqueda de chicken
 	public List<Chicken> findAllChickensAndEggsByFarmID(long farmID) {
 		return repo.findAllByFarmID(farmID);
 	}
@@ -68,6 +68,11 @@ public class ChickenService {
 		
 	}
 
+	public List<Chicken> findAllLivestock() {
+		return (List<Chicken>)repo.findAll();
+	}
+	
+	//manejo de chicken
 	public void saveChicken(Chicken c) {
 		repo.save(c);
 	}
@@ -92,10 +97,6 @@ public class ChickenService {
 		repo.deleteById(randEggID);
 	}
 
-	public List<Chicken> findAllLivestock() {
-		return (List<Chicken>)repo.findAll();
-	}
-	
 	public void saveAllLivestock(List<Chicken> chickenList) {
 		repo.saveAll(chickenList);
 	}
