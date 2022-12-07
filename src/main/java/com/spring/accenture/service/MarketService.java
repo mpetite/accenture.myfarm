@@ -38,7 +38,7 @@ public class MarketService {
 		// fijo las ganancias totales
 		double totalWinning = CHICKENPRICE * amount;
 		
-		if (chickenService.findAllChickens(farmID).size()>0)
+		if (chickenService.findProducts(farmID,1).size()>0)
 		{
 		// entonces:
 		
@@ -101,7 +101,7 @@ public class MarketService {
 		// fijo las ganancias totales
 		double totalWinning = EGGPRICE * amount;
 		
-		if (chickenService.findAllEggs(farmID).size()>0)
+		if (chickenService.findProducts(farmID, 2).size()>0)
 		{
 				// borro la cantidad de gallinas
 				for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {

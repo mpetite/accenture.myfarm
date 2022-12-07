@@ -16,28 +16,6 @@ public class ChickenService {
 	@Autowired
 	private ChickenRepository repo;
 	//metodos de busqueda de chicken
-	public List<Chicken> findAllChickensAndEggsByFarmID(long farmID) {
-		return repo.findAllByFarmID(farmID);
-	}
-
-	public List<Chicken> findAllChickens(long farmID) {
-
-		List<Chicken> farmRepo = repo.findAllByFarmID(farmID);
-		
-		farmRepo = farmRepo.stream().filter(Chicken -> !Chicken.getIsEgg()).collect(Collectors.toList());
-
-		return farmRepo;
-	}
-
-	public List<Chicken> findAllEggs(long farmID) {
-
-		List<Chicken> farmRepo = repo.findAllByFarmID(farmID);
-		
-		farmRepo = farmRepo.stream().filter(Chicken -> Chicken.getIsEgg()).collect(Collectors.toList());
-
-		return farmRepo;
-	}
-
 	public List<Chicken> findProducts(long farmID, int product) {
 
 		List<Chicken> productList = repo.findAllByFarmID(farmID);
@@ -81,7 +59,7 @@ public class ChickenService {
 		// consigo un ID aleatorio entre los ids de las gallinas
 		/*long randChickenID = (long) Math.random() * (0 - findAllChickens(farmID).size() + 1)
 				+ findAllChickens(farmID).size();*/
-		long randChickenID = findAllChickens(farmID).get(0).getID();
+		long randChickenID = findProducts(farmID, 1).get(0).getID();
 		
 		// lo borro
 		repo.deleteById(randChickenID);
@@ -91,7 +69,7 @@ public class ChickenService {
 		// consigo un ID aleatorio entre los ids de las gallinas
 		/*long randEggID = (long) Math.random() * (0 - findAllEggs(farmID).size() + 1) + findAllEggs(farmID).size();
 		*/
-		long randEggID = findAllEggs(farmID).get(0).getID();
+		long randEggID = findProducts(farmID, 2).get(0).getID();
 		
 		// lo borro
 		repo.deleteById(randEggID);
