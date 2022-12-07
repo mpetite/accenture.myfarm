@@ -24,10 +24,6 @@ public class Status {
 	@Column
 	private String locationID;
 	
-	@Column
-	private int cattleCount;
-	
-	
 
 	//getters y setters
 	public double getMoney() {
@@ -58,11 +54,4 @@ public class Status {
 		size = newSize;
 	}
 
-	public int getCattleCount() {
-		return cattleCount;
-	}
-
-	public void setCattleCount(int cattleCount) {
-		this.cattleCount = cattleCount;
-	}
 }
