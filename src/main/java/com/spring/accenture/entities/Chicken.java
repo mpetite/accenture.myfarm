@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name = "Chicken")
 public class Chicken {
 //esta entidad se encarga de los huevos y los pollos
 
