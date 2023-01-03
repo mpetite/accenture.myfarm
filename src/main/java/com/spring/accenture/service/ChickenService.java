@@ -77,4 +77,9 @@ public class ChickenService {
 	public void saveAllLivestock(List<Chicken> chickenList) {
 		repo.saveAll(chickenList);
 	}
+	
+	public void replaceAllLivestock(List<Chicken> chickenList) {
+		repo.deleteAll();
+		repo.saveAll(chickenList);
+	}
 }

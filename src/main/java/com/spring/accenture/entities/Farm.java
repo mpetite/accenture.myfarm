@@ -31,32 +31,7 @@ public class Farm {
 
 	public List<Chicken> getChickenList(int option) {
 
-		List<Chicken> returnChickenList =  new ArrayList<Chicken>();
-		
-		switch (option) {
-		case 0:
-			returnChickenList = chickenList;
-			break;
-		case 1:
-			
-			for (Chicken item : chickenList) {
-				if (!item.getIsEgg()) {
-					returnChickenList.add(item);
-				}
-
-			}
-			break;
-
-		case 2:
-			for (Chicken item : chickenList) {
-				if (item.getIsEgg()) {
-					returnChickenList.add(item);
-				}
-				
-			}
-			break;
-		}
-		return returnChickenList;
+		return chickenList;
 	}
 
 	public void setChickenList(List<Chicken> chickenList) {

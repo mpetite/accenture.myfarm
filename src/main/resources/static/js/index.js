@@ -52,10 +52,11 @@ function buyChicken(id){
 		        }
 		    });
 };
-		function agregarDia(){
+		function agregarDia(id){
 		$.ajax({
 		        type: "POST",
 		        url: "/api/agregarDia",
+		        data: {"id": id},
 		        success: function(result) {
 		            location.reload();
 		        },
