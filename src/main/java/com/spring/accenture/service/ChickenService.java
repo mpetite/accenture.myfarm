@@ -78,8 +78,17 @@ public class ChickenService {
 		repo.saveAll(chickenList);
 	}
 	
-	public void replaceAllLivestock(List<Chicken> chickenList) {
-		repo.deleteAll();
+	public void replaceAllLivestock(List<Chicken> chickenList, long farmID) {
+		
+		List<Chicken> oldList= new ArrayList();
+		
+		oldList = repo.findAllByFarmID(farmID);
+		
+		
+		for (Chicken chicken: oldList) {
+			repo.delete(chicken);
+		}
+		
 		repo.saveAll(chickenList);
 	}
 }

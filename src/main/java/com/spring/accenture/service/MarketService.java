@@ -196,7 +196,7 @@ public class MarketService {
 		totalList = excedente(Stream.concat(newChickenList.stream(), newEggList.stream()).collect(Collectors.toList()), farmID);
 		
 		//guardo lista nueva
-		chickenService.replaceAllLivestock(totalList);
+		chickenService.replaceAllLivestock(totalList, farmID);
 	}
 	
 	private List<Chicken> excedente(List<Chicken> chickenList, long farmID) {

@@ -1,5 +1,6 @@
 package com.spring.accenture.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +13,5 @@ public interface ChickenRepository extends JpaRepository<Chicken, Long> {
 	List<Chicken> findAllByFarmID(long farmID);
 	
 	List<Chicken> findAllByisEgg(boolean b);
-
+	
 }
