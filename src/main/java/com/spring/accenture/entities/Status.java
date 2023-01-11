@@ -1,11 +1,13 @@
 package com.spring.accenture.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Status")
@@ -26,6 +28,12 @@ public class Status {
 	@Column
 	private String locationID;
 	
+	@Column
+	private long farmerID;
+	
+	
+	@Autowired
+	private Farmer farmer;
 
 	//getters y setters
 	public double getMoney() {
@@ -33,7 +41,12 @@ public class Status {
 	}
 
 	public void setMoney(double money) {
-		this.money = money;
+		
+		if (farmerID == farmer.getId()) {
+			this.money = farmer.getWallet();
+		}
+		
+		
 	}
 
 	public String getLocationID() {
@@ -56,4 +69,7 @@ public class Status {
 		size = newSize;
 	}
 
+	public long getFarmerID() {
+		return farmerID;
+	}
 }

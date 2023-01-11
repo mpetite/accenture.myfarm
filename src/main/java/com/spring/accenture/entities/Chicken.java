@@ -1,6 +1,11 @@
 package com.spring.accenture.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
 @Entity
@@ -60,8 +65,15 @@ public class Chicken {
 		return isEgg;
 	}
 
-	public void setIsEgg() {
-		this.isEgg = this.ageDays <= 10;
+	public void setIsEgg(boolean a) {
+		this.isEgg = a;
 	}
-
+	
+	
+	//Metodos necesarios
+	//metodo para el incremento de la edad de la entidad
+	public void increaseAge() {
+		this.ageDays = ageDays + 1; 
+		this.isEgg = ageDays <= 10;
+	}
 }

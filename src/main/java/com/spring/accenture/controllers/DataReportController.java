@@ -80,11 +80,9 @@ public class DataReportController {
 	
 	//Mapping para sumarle un dia a las edades, disparado por botón agregar dia
 	@PostMapping(value="/agregarDia")
-	public ResponseEntity agregarDia(@RequestParam String id) throws InsufficientLivestockException {
+	public ResponseEntity agregarDia() {
 		
-		
-		marketService.agregarDia(Long.parseLong(id));
-				
+		marketService.agregarDia();
 		return ResponseEntity.ok("done");
 	}
 }
