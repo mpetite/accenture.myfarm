@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.accenture.entities.Chicken;
-import com.spring.accenture.entities.Status;
+import com.spring.accenture.entities.Farm;
+import com.spring.accenture.entities.Farmer;
 import com.spring.accenture.exceptions.InsufficientFundsException;
 import com.spring.accenture.exceptions.InsufficientLivestockException;
 import com.spring.accenture.exceptions.InsufficientStorageException;
@@ -23,7 +24,10 @@ public class MarketService {
 	private ChickenService chickenService;
 
 	@Autowired
-	private StatusService statusService;
+	private FarmService farmService;
+	
+	@Autowired
+	private FarmerService farmerService;
 
 	
 	//armo los metodos necesarios
@@ -33,12 +37,13 @@ public class MarketService {
 			throws InsufficientLivestockException {
 
 		// Consigo el tamaño de la granja
-		Status farmStatus = statusService.getStatus(farmID);
+		Farm myFarm = farmService.getFarmByID(farmID);
+		Farmer myFarmer = farmerService.getFarmerByID(myFarm.getFarmerID());
 
 		// fijo las ganancias totales
 		double totalWinning = CHICKENPRICE * amount;
 		
-		if (chickenService.findProducts(farmID,1).size()>0)
+		if (myFarm.getChickenList(1).size()>0)
 		{
 		// entonces:
 		
@@ -47,8 +52,8 @@ public class MarketService {
 				chickenService.deleteChicken(farmID);
 			}
 			// """"transfiero"""" el dinero
-			farmStatus.setMoney(farmStatus.getMoney() + totalWinning);
-			statusService.saveStatus(farmStatus);
+			myFarmer.setWallet(myFarmer.getWallet() + totalWinning);
+			farmerService.saveFarmer(myFarmer);
 		}
 
 	else {
@@ -60,8 +65,9 @@ public class MarketService {
 			throws InsufficientFundsException, InsufficientStorageException {
 
 		// Consigo la cantidad de gallinas en la granja y el tamaño de la misma
-		int chickenCount = chickenService.findProducts(farmID, 1).size();
-		Status farmStatus = statusService.getStatus(farmID);
+		Farm myFarm = farmService.getFarmByID(farmID);
+		Farmer myFarmer = farmerService.getFarmerByID(myFarm.getFarmerID());
+		int chickenCount = myFarm.getChickenList(1).size();
 
 		// fijo el precio total
 		double totalPrice = CHICKENPRICE * amount;
@@ -69,11 +75,11 @@ public class MarketService {
 		if (
 		// el conteo de gallinas + la cantidad a comprar no excede el tamaño de la
 		// granja
-		(farmStatus.getSize().equalsIgnoreCase("Medium") && chickenCount < 50
-				|| farmStatus.getSize().equalsIgnoreCase("Small") && chickenCount < 24
-				|| farmStatus.getSize().equalsIgnoreCase("Large") && chickenCount < 100)) {
+		(myFarm.getSize().equalsIgnoreCase("Medium") && chickenCount < 50
+				|| myFarm.getSize().equalsIgnoreCase("Small") && chickenCount < 24
+				|| myFarm.getSize().equalsIgnoreCase("Large") && chickenCount < 100)) {
 			// y si el usuario tiene suficeinte dinero
-			if (farmStatus.getMoney() - totalPrice >= 0)
+			if (myFarmer.getWallet() - totalPrice >= 0)
 			// entonces:
 			{
 				// creo la cantidad de gallinas
@@ -82,8 +88,8 @@ public class MarketService {
 					chickenService.saveChicken(chicken);
 				}
 				// """"transfiero"""" el dinero
-				statusService.getStatus(farmID).setMoney(farmStatus.getMoney() - totalPrice);
-				statusService.saveStatus(farmStatus);
+				myFarmer.setWallet(myFarmer.getWallet() - totalPrice);
+				farmerService.saveFarmer(myFarmer);
 			} else {
 				throw new InsufficientFundsException("You fool! You´re 30 cents away from having a quarter!");
 			}
@@ -96,12 +102,13 @@ public class MarketService {
 	public void sellEgg(int amount, long farmID) 
 			throws InsufficientLivestockException {
 		// Consigo status de granja
-		Status farmStatus = statusService.getStatus(farmID);
+		Farm myFarm = farmService.getFarmByID(farmID);
+		Farmer myFarmer = farmerService.getFarmerByID(myFarm.getFarmerID());
 
 		// fijo las ganancias totales
 		double totalWinning = EGGPRICE * amount;
 		
-		if (chickenService.findProducts(farmID, 2).size()>0)
+		if (myFarm.getChickenList(2).size()>0)
 		{
 				// borro la cantidad de gallinas
 				for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
@@ -109,8 +116,8 @@ public class MarketService {
 	
 				}
 				// """"transfiero"""" el dinero
-				statusService.getStatus(farmID).setMoney(farmStatus.getMoney() + totalWinning);
-				statusService.saveStatus(farmStatus);
+				myFarmer.setWallet(myFarmer.getWallet() + totalWinning);
+				farmerService.saveFarmer(myFarmer);
 		}
 		else {
 			throw new InsufficientLivestockException("No eggs to sell.");
@@ -121,8 +128,9 @@ public class MarketService {
 			throws InsufficientFundsException, InsufficientStorageException {
 
 		// Consigo la cantidad de gallinas en la granja y el tamaño de la misma
-		int eggCount = chickenService.findProducts(farmID, 2).size();
-		Status farmStatus = statusService.getStatus(farmID);
+		Farm myFarm = farmService.getFarmByID(farmID);
+		Farmer myFarmer = farmerService.getFarmerByID(myFarm.getFarmerID());
+		int eggCount = myFarm.getChickenList(2).size();
 
 		// fijo el precio total
 		double totalPrice = EGGPRICE * amount;
@@ -130,11 +138,11 @@ public class MarketService {
 		if (
 		// el conteo de gallinas + la cantidad a comprar no excede el tamaño de la
 		// granja
-				(farmStatus.getSize().equalsIgnoreCase("Medium") && eggCount < 200 ||
-						  farmStatus.getSize().equalsIgnoreCase("Small") && eggCount < 100 ||
-						  farmStatus.getSize().equalsIgnoreCase("Large") && eggCount < 300)) {
+				(myFarm.getSize().equalsIgnoreCase("Medium") && eggCount < 200 ||
+						myFarm.getSize().equalsIgnoreCase("Small") && eggCount < 100 ||
+						myFarm.getSize().equalsIgnoreCase("Large") && eggCount < 300)) {
 			// y si el usuario tiene suficeinte dinero
-			if (farmStatus.getMoney() - totalPrice >= 0)
+			if (myFarmer.getWallet() - totalPrice >= 0)
 			// entonces:
 			{
 				// creo la cantidad de gallinas
@@ -143,8 +151,8 @@ public class MarketService {
 					chickenService.saveChicken(egg);
 				}
 				// """"transfiero"""" el dinero
-				statusService.getStatus(farmID).setMoney(farmStatus.getMoney() - totalPrice);
-				statusService.saveStatus(farmStatus);
+				myFarmer.setWallet(myFarmer.getWallet() - totalPrice);
+				farmerService.saveFarmer(myFarmer);
 			} else {
 					throw new InsufficientFundsException("You fool! You´re 30 cents away from having a quarter!");
 			}
@@ -162,7 +170,9 @@ public class MarketService {
 		
 		for (Chicken chicken : chickenList) {
 			
-			chicken.increaseAge();
+			chicken.setAgeDays(chicken.getAgeDays() +1);
+			
+			chicken.setIsEgg();
 			
 			newEggList.add(chicken);
 			

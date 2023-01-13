@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.accenture.exceptions.InsufficientFundsException;
 import com.spring.accenture.exceptions.InsufficientLivestockException;
 import com.spring.accenture.exceptions.InsufficientStorageException;
-import com.spring.accenture.service.FarmService;
 import com.spring.accenture.service.MarketService;
 
 
@@ -19,8 +18,6 @@ import com.spring.accenture.service.MarketService;
 @RequestMapping("/api")
 public class DataReportController {
 
-	@Autowired
-	private FarmService farmService;
 	
 	@Autowired
 	private MarketService marketService;

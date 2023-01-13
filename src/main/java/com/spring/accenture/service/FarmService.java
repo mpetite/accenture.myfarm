@@ -4,25 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.accenture.entities.Farm;
+import com.spring.accenture.repositories.FarmRepository;
 
 @Service
 public class FarmService {
 //servicio que se encarga de la granja en total, tanto chicken como localidad en si
 	
 	@Autowired
-	private ChickenService ckService;
-	
-	@Autowired
-	private StatusService sService;
+	private FarmRepository farmRepository;
 
 	//Metodos
 	public Farm getFarmByID(long farmID) {
 		
 		Farm myFarm = new Farm();
 		
-		myFarm.setChickenList(ckService.findProducts(farmID, 0));
-		myFarm.setStatus(sService.getStatus(farmID));
+		Farm repoReturn = farmRepository.findById(farmID);
+		
+		myFarm = repoReturn;
 		
 		return myFarm;
 	}	
+
+	public void saveFarm(Farm farm) {
+		farmRepository.save(farm);
+	}
 }

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.accenture.entities.Chicken;
 import com.spring.accenture.entities.Farm;
-import com.spring.accenture.entities.Status;
-import com.spring.accenture.repositories.StatusRepository;
+import com.spring.accenture.entities.Farm;
+import com.spring.accenture.repositories.FarmRepository;
 import com.spring.accenture.service.FarmService;
 
 
@@ -22,7 +22,7 @@ public class FarmController {
 	private FarmService farmService;
 	
 	@Autowired
-	private StatusRepository statusRepository;
+	private FarmRepository statusRepository;
 
 	//mapeo la pagina de bienvenida, donde el usuario selecciona la granja que desea manejar
 	//HTML: home
@@ -44,14 +44,10 @@ public class FarmController {
         
 		Farm theFarm = farmService.getFarmByID(nbrFarmID);
 		
-		List<Chicken> farmChickenList = theFarm.getChickenList(0);
-		
-		Status farmStatus =theFarm.getStatus();
-		
-        model.addAttribute("farmStatus", farmStatus);
+        model.addAttribute("farmStatus", theFarm);
         model.addAttribute("chickenCount", theFarm.getChickenList(1).size());
         model.addAttribute("eggCount", theFarm.getChickenList(2).size());
-        model.addAttribute("chickenList", farmChickenList);
+        model.addAttribute("chickenList", theFarm.getChickenList(0));
             
     		
     	return "farm";

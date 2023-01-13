@@ -3,68 +3,99 @@ package com.spring.accenture.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.spring.accenture.repositories.ChickenRepository;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Status")
 public class Farm {
+//esta entity declara los detalles de una granja.
+	
+	@Autowired
+	ChickenRepository chickenRepository;
 
-	//declaro las variables necesarias
+	//declaro los campos necesarios
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ID;
-
-	private Status status;
-
+	
+	
+	@Column
+	private String size;
+	
+	@Column
+	private String name;
+	
+	@Column(name = "Farmers_id")
+	private long farmerID;
+	
 	private List<Chicken> chickenList;
 
-	
-	
 	//getters y setters
+
+	public String getLocationID() {
+		return name;
+	}
+
+	public void setLocationID(String locationID) {
+		this.name = locationID;
+	}
+
 	public long getID() {
 		return ID;
 	}
 
-	public void setID(long iD) {
-		ID = iD;
+	public String getSize() {
+		return size;
 	}
 
-	public Status getStatus() {
-		return status;
+	public void setSize(String newSize) {
+		size = newSize;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public long getFarmerID() {
+		return farmerID;
 	}
+	
+	public List<Chicken> getChickenList(int option){
 
-	public List<Chicken> getChickenList(int option) {
+		List<Chicken> productList = chickenRepository.findAllByFarmID(this.ID);
+		List<Chicken> returnList = new ArrayList<>();
 
-		List<Chicken> returnChickenList =  new ArrayList<Chicken>();
-		
 		switch (option) {
 		case 0:
-			returnChickenList = chickenList;
-			break;
-		case 1:
-			
-			for (Chicken item : chickenList) {
-				if (!item.getIsEgg()) {
-					returnChickenList.add(item);
-				}
+			return productList;
 
+		case 1:
+			for (Chicken item : productList) {
+				if (!item.getIsEgg()) {
+					returnList.add(item);
+				}
 			}
-			break;
+			return returnList;
 
 		case 2:
-			for (Chicken item : chickenList) {
+			for (Chicken item : productList) {
 				if (item.getIsEgg()) {
-					returnChickenList.add(item);
+					returnList.add(item);
 				}
-				
 			}
-			break;
+			return returnList;
+			
+		default: return productList;
 		}
-		return returnChickenList;
+		
 	}
 
 	public void setChickenList(List<Chicken> chickenList) {
 		this.chickenList = chickenList;
 	}
-
-
-	
 }

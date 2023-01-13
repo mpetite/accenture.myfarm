@@ -18,7 +18,7 @@ public class Chicken {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ID;
 	
-	@Column(name = "farmID")
+	@Column(name = "Status_id")
 	private long farmID;
 	
 	@Column
@@ -36,7 +36,7 @@ public class Chicken {
 	public Chicken(long farmID, int age) {
 		this.farmID = farmID;
 		this.ageDays = age;
-		this.isEgg = age <= 10;
+		this.isEgg = age < 10;
 	}
 	
 	
@@ -65,15 +65,8 @@ public class Chicken {
 		return isEgg;
 	}
 
-	public void setIsEgg(boolean a) {
-		this.isEgg = a;
+	public void setIsEgg() {
+		this.isEgg = this.ageDays >10;
 	}
-	
-	
-	//Metodos necesarios
-	//metodo para el incremento de la edad de la entidad
-	public void increaseAge() {
-		this.ageDays = ageDays + 1; 
-		this.isEgg = ageDays <= 10;
-	}
+
 }

@@ -1,11 +1,14 @@
 package com.spring.accenture.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "Farmers")
 public class Farmer {
 
 	
@@ -13,9 +16,12 @@ public class Farmer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@Column
 	private String name;
-	
+	@Column
 	private double wallet;
+	@Column
+	private String pass;
 
 	
 	
@@ -23,9 +29,9 @@ public class Farmer {
 	
 	public Farmer() {}
 	
-	public Farmer(String fname, double money) {
+	public Farmer(String farmerName, double money) {
 		
-		this.name = fname;
+		this.name = farmerName;
 		this.wallet = money;
 		
 	}
@@ -51,6 +57,14 @@ public class Farmer {
 
 	public long getId() {
 		return id;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 	
 	
