@@ -12,7 +12,6 @@ import com.spring.accenture.exceptions.InsufficientLivestockException;
 import com.spring.accenture.exceptions.InsufficientStorageException;
 import com.spring.accenture.service.MarketService;
 
-
 //controller de calculos
 @RestController
 @RequestMapping("/api")

@@ -27,7 +27,6 @@ public class Farm {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ID;
 	
-	
 	@Column
 	private String size;
 	

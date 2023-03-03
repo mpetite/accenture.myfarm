@@ -3,7 +3,6 @@ package com.spring.accenture.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.accenture.entities.Chicken;
@@ -16,26 +15,21 @@ import com.spring.accenture.exceptions.InsufficientStorageException;
 @Service
 public class MarketService {
 //Este servicio maneja la ecena del mercado
-	
-	//Declaramos constantes
+
+	// Declaramos constantes
 	public static final double CHICKENPRICE = 35;
 	public static final double EGGPRICE = 1;
 
-	@Autowired
 	private ChickenService chickenService;
 
-	@Autowired
 	private FarmService farmService;
-	
-	@Autowired
+
 	private FarmerService farmerService;
 
-	
-	//armo los metodos necesarios
-	
-	//Manejo el mercado de las gallinas
-	public void sellChicken(int amount, long farmID)
-			throws InsufficientLivestockException {
+	// armo los metodos necesarios
+
+	// Manejo el mercado de las gallinas
+	public void sellChicken(int amount, long farmID) throws InsufficientLivestockException {
 
 		// Consigo el tamaño de la granja
 		Farm myFarm = farmService.getFarmByID(farmID);
@@ -43,11 +37,10 @@ public class MarketService {
 
 		// fijo las ganancias totales
 		double totalWinning = CHICKENPRICE * amount;
-		
-		if (myFarm.getChickenList(1).size()>0)
-		{
-		// entonces:
-		
+
+		if (myFarm.getChickenList(1).size() > 0) {
+			// entonces:
+
 			// borro la cantidad de gallinas
 			for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
 				chickenService.deleteChicken(farmID);
@@ -57,13 +50,12 @@ public class MarketService {
 			farmerService.saveFarmer(myFarmer);
 		}
 
-	else {
-		throw new InsufficientLivestockException("No chicken to sell.");
+		else {
+			throw new InsufficientLivestockException("No chicken to sell.");
+		}
 	}
-}
 
-	public void buyChicken(int amount, long farmID)
-			throws InsufficientFundsException, InsufficientStorageException {
+	public void buyChicken(int amount, long farmID) throws InsufficientFundsException, InsufficientStorageException {
 
 		// Consigo la cantidad de gallinas en la granja y el tamaño de la misma
 		Farm myFarm = farmService.getFarmByID(farmID);
@@ -99,34 +91,30 @@ public class MarketService {
 		}
 	}
 
-	//Manejo el mercado de los huevos
-	public void sellEgg(int amount, long farmID) 
-			throws InsufficientLivestockException {
+	// Manejo el mercado de los huevos
+	public void sellEgg(int amount, long farmID) throws InsufficientLivestockException {
 		// Consigo status de granja
 		Farm myFarm = farmService.getFarmByID(farmID);
 		Farmer myFarmer = farmerService.getFarmerByID(myFarm.getFarmerID());
 
 		// fijo las ganancias totales
 		double totalWinning = EGGPRICE * amount;
-		
-		if (myFarm.getChickenList(2).size()>0)
-		{
-				// borro la cantidad de gallinas
-				for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
-					chickenService.deleteEgg(farmID);
-	
-				}
-				// """"transfiero"""" el dinero
-				myFarmer.setWallet(myFarmer.getWallet() + totalWinning);
-				farmerService.saveFarmer(myFarmer);
-		}
-		else {
+
+		if (myFarm.getChickenList(2).size() > 0) {
+			// borro la cantidad de gallinas
+			for (int byeChicken = 1; byeChicken <= amount; byeChicken++) {
+				chickenService.deleteEgg(farmID);
+
+			}
+			// """"transfiero"""" el dinero
+			myFarmer.setWallet(myFarmer.getWallet() + totalWinning);
+			farmerService.saveFarmer(myFarmer);
+		} else {
 			throw new InsufficientLivestockException("No eggs to sell.");
 		}
-}
+	}
 
-	public void buyEgg(int amount, long farmID) 
-			throws InsufficientFundsException, InsufficientStorageException {
+	public void buyEgg(int amount, long farmID) throws InsufficientFundsException, InsufficientStorageException {
 
 		// Consigo la cantidad de gallinas en la granja y el tamaño de la misma
 		Farm myFarm = farmService.getFarmByID(farmID);
@@ -139,9 +127,9 @@ public class MarketService {
 		if (
 		// el conteo de gallinas + la cantidad a comprar no excede el tamaño de la
 		// granja
-				(myFarm.getSize().equalsIgnoreCase("Medium") && eggCount < 200 ||
-						myFarm.getSize().equalsIgnoreCase("Small") && eggCount < 100 ||
-						myFarm.getSize().equalsIgnoreCase("Large") && eggCount < 300)) {
+		(myFarm.getSize().equalsIgnoreCase("Medium") && eggCount < 200
+				|| myFarm.getSize().equalsIgnoreCase("Small") && eggCount < 100
+				|| myFarm.getSize().equalsIgnoreCase("Large") && eggCount < 300)) {
 			// y si el usuario tiene suficeinte dinero
 			if (myFarmer.getWallet() - totalPrice >= 0)
 			// entonces:
@@ -155,29 +143,29 @@ public class MarketService {
 				myFarmer.setWallet(myFarmer.getWallet() - totalPrice);
 				farmerService.saveFarmer(myFarmer);
 			} else {
-					throw new InsufficientFundsException("You fool! You´re 30 cents away from having a quarter!");
+				throw new InsufficientFundsException("You fool! You´re 30 cents away from having a quarter!");
 			}
 		} else {
-				throw new InsufficientStorageException("You´re gonna need a bigger boat.");
+			throw new InsufficientStorageException("You´re gonna need a bigger boat.");
 		}
 	}
-	
-	//Misc
+
+	// Misc
 	public void agregarDia() {
-		
+
 		List<Chicken> chickenList = chickenService.findAllLivestock();
-		
+
 		List<Chicken> newEggList = new ArrayList<Chicken>();
-		
+
 		for (Chicken chicken : chickenList) {
-			
-			chicken.setAgeDays(chicken.getAgeDays() +1);
-			
+
+			chicken.setAgeDays(chicken.getAgeDays() + 1);
+
 			chicken.setIsEgg();
-			
+
 			newEggList.add(chicken);
-			
-			if(chicken.getAgeDays()%7==0 && !chicken.getIsEgg()) {
+
+			if (chicken.getAgeDays() % 7 == 0 && !chicken.getIsEgg()) {
 				newEggList.add(new Chicken(chicken.getFarmId(), 0));
 			}
 		}

@@ -10,16 +10,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Farmers")
 public class Farmer {
-
+//entidad de usuarios
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@Column
 	private String name;
+	
 	@Column
 	private double wallet;
+	
 	@Column
 	private String pass;
 
